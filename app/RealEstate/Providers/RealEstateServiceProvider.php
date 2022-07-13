@@ -17,6 +17,8 @@ class RealEstateServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->loadMigrationsFrom(app_path('RealEstate/Migrations'));
+
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->namespace)
