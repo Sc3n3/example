@@ -18,6 +18,8 @@ class CreatePropertiesTable extends Migration
             $table->string('name');
             $table->string('zip');
             $table->text('address')->nullable();
+            $table->decimal('latitude', 8, 6)->nullable();
+            $table->decimal('longitude', 9, 6)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

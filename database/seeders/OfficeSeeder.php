@@ -17,6 +17,8 @@ class OfficeSeeder extends Seeder
         $office = new Office();
         $office->setName('Default');
         $office->setZipCode('cm27pj');
+        $office->setLatitude(51.729157);
+        $office->setLongitude(0.478027 );
         $office->setDefault();
         $office->save();
     }

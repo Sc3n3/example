@@ -17,15 +17,15 @@ class RealEstateServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->loadMigrationsFrom(app_path('RealEstate/Migrations'));
+        $this->loadMigrationsFrom(app_path('RealEstate/Resources/migrations'));
 
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->namespace)
-            ->group(app_path('RealEstate/Routes/api.php'));
+            ->group(app_path('RealEstate/Resources/routes/api.php'));
 
         Route::middleware('web')
             ->namespace($this->namespace)
-            ->group(app_path('RealEstate/Routes/web.php'));
+            ->group(app_path('RealEstate/Resources/routes/web.php'));
     }
 }

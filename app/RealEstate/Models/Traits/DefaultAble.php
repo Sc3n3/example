@@ -7,9 +7,9 @@ use Illuminate\Database\Query\Builder;
 trait DefaultAble
 {
     /**
-     * @param $query
+     * @param Builder $query
      * @param bool $value
-     * @return mixed
+     * @return Builder
      */
     public function scopeDefault(Builder $query, bool $value = true)
     {
@@ -31,6 +31,6 @@ trait DefaultAble
      */
     public function isDefault()
     {
-        return !!$this->default;
+        return (bool) $this->default;
     }
 }

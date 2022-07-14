@@ -3,12 +3,13 @@
 namespace App\RealEstate\Models;
 
 use App\RealEstate\Models\Traits\DefaultAble;
+use App\RealEstate\Models\Traits\LocationAble;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Office extends Model
 {
-    use HasFactory, DefaultAble;
+    use HasFactory, DefaultAble, LocationAble;
 
     /**
      * @var string
