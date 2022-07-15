@@ -29,5 +29,9 @@ class RealEstateServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(app_path('RealEstate/assets/routes/web.php'));
+
+        $this->app->bind(IZipResolver::class, function(){
+            return new PostCodesIO();
+        });
     }
 }
