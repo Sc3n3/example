@@ -13,9 +13,9 @@ Route::prefix('/appointments')->group(function(){
 });
 
 Route::prefix('/offices')->group(function(){
-    Route::get('/', 'AppointmentController@index');
-    Route::post('/', 'AppointmentController@store');
-    Route::get('/{office}', 'AppointmentController@show');
-    Route::patch('/{office}', 'AppointmentController@update');
-    Route::delete('/{office}', 'AppointmentController@destroy');
+    Route::get('/', 'OfficeController@index');
+    Route::post('/', 'OfficeController@store');
+    Route::get('/{office}', 'OfficeController@show');
+    Route::patch('/{office}', 'OfficeController@update');
+    Route::delete('/{office}', 'OfficeController@destroy');
 });
