@@ -2,27 +2,27 @@
 
 namespace App\RealEstate\Controllers;
 
-use App\RealEstate\Models\Office;
+use App\RealEstate\Models\Property;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class OfficeController extends Controller
+class PropertyController extends Controller
 {
     /**
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        return response()->json(Office::all());
+        return response()->json(Property::all());
     }
 
     /**
-     * @param Office $office
+     * @param Property $property
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Office $office)
+    public function show(Property $property)
     {
-        return response()->json($office);
+        return response()->json($property);
     }
 
     public function store()

@@ -19,3 +19,11 @@ Route::prefix('/offices')->group(function(){
     Route::patch('/{office}', 'OfficeController@update');
     Route::delete('/{office}', 'OfficeController@destroy');
 });
+
+Route::prefix('/properties')->group(function(){
+    Route::get('/', 'OfficeController@index');
+    Route::post('/', 'OfficeController@store');
+    Route::get('/{property}', 'OfficeController@show');
+    Route::patch('/{property}', 'OfficeController@update');
+    Route::delete('/{property}', 'OfficeController@destroy');
+});

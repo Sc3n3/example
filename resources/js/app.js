@@ -9,6 +9,9 @@ window.Vue = require('vue').default;
 
 import VueRouter from 'vue-router';
 import VueAxios from 'vue-axios';
+import VueGoogleMap from 'vuejs-google-maps'
+import 'vuejs-google-maps/dist/vuejs-google-maps.css'
+
 import App from './components/App.vue';
 import routes from './routes.js';
 
@@ -25,6 +28,12 @@ import routes from './routes.js';
 
 Vue.use(VueRouter);
 Vue.use(VueAxios, window.axios);
+Vue.use(VueGoogleMap, {
+    load: {
+        apiKey: process.env.MIX_GOOGLE_API_KEY,
+        libraries: ['places', 'directions']
+    }
+});
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -42,7 +51,7 @@ const app = new Vue({
     router: router,
     render: h => h(App),
     data: {
-        appName: process.env.MIX_APP_NAME,
+        ui: { name: process.env.MIX_APP_NAME, loading: false },
         auth: { user: null, token: null }
     },
     methods: {
@@ -102,10 +111,14 @@ const app = new Vue({
             if (this.auth.token) {
                 request.headers['Authorization'] = 'Bearer '+ this.auth.token;
             }
+            this.ui.loading = true;
             return request;
         });
 
-        this.axios.interceptors.response.use(undefined, (err) => {
+        this.axios.interceptors.response.use((response) => {
+            this.ui.loading = false;
+            return response;
+        }, (err) => {
             if (err.response.status === 401) {
                 if (!err.config.url.includes('user/refresh') && !err.config.retryRequest) {
                     err.config.retryRequest = true;
@@ -126,6 +139,7 @@ const app = new Vue({
 
                 alert(message.join("\n"));
             }
+            this.ui.loading = false;
             return Promise.reject(err);
         });
     },
