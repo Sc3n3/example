@@ -4,7 +4,6 @@ namespace App\RealEstate\Services;
 
 use App\RealEstate\Contracts\IZipResolver;
 use GuzzleHttp\Client;
-use Psr\Http\Message\ResponseInterface;
 
 class PostCodesIO implements IZipResolver
 {
@@ -33,24 +32,15 @@ class PostCodesIO implements IZipResolver
     }
 
     /**
-     * @param ResponseInterface $response
-     * @return \Illuminate\Support\Collection
-     */
-    protected function json(ResponseInterface $response)
-    {
-        return collect(json_decode($response->getBody()->getContents(), true));
-    }
-
-    /**
      * @param $zip
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function zipInfo($zip)
     {
+        $zip = str_replace(' ', '', $zip);
         $response = $this->client->get('/postcodes/'. urlencode($zip));
-
-        return $this->json($response)->get('result');
+        return JsonParser::parse($response)->get('result');
     }
 
     /**
@@ -86,7 +76,7 @@ class PostCodesIO implements IZipResolver
         ];
 
         $response = $this->client->get('/postcodes?'. http_build_query($query));
-        $result = $this->json($response)->get('result');
+        $result = JsonParser::parse($response)->get('result');
 
         return collect($result)->sortBy('distance')->first();
     }
@@ -102,7 +92,7 @@ class PostCodesIO implements IZipResolver
         $location = $this->locationInfo($latitude, $longitude);
 
         if ($location) {
-            return $location['postcode'];
+            return str_replace(' ', '', $location['postcode']);
         }
 
         return null;
