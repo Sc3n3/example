@@ -1,130 +1,285 @@
 <template>
   <div class="container bg-white py-4">
-    <form class="form" @submit.prevent="">
-      <div class="card">
-        <div class="card-header">
-          Customer Details
-        </div>
-        <div class="card-body">
-          <div class="row justify-content-center">
-            <div class="col-4 form-item">
-              <label class="form-label">Full Name</label>
-              <input type="text" class="form-control" />
-            </div>
-            <div class="col-4 form-item">
-              <label class="form-label">Phone Number</label>
-              <input type="text" class="form-control" />
-            </div>
-            <div class="col-4 form-item">
-              <label class="form-label">Email Address</label>
-              <input type="text" class="form-control" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mt-3 mb-4">
-        <div class="col-3">
+    <form class="form" @submit.prevent="submit">
+      <div class="row">
+        <div class="col-7">
           <div class="card">
             <div class="card-header">
-              Event Details
+              Customer Details
             </div>
             <div class="card-body">
-              <div class="form-item mb-3">
-                <label class="form-label">Event Date</label>
-                <input v-model="form.date" class="form-control" type="text" />
-              </div>
-              <div class="form-item mb-2">
-                <label class="form-label">Which office do you want to start?</label>
-                <select v-model="from" class="form-control">
-                  <option v-for="office in offices" :value="office" v-html="office.name"></option>
-                </select>
-              </div>
-              <div class="form-item">
-                <label class="form-label">ETA</label>
-                <input v-bind="eta" class="form-control" type="text" readonly="readonly" />
+              <div class="row justify-content-center">
+                <div class="col-4 form-item">
+                  <label class="form-label">Full Name</label>
+                  <input v-model="form.customer.name" type="text" class="form-control" required="" />
+                </div>
+                <div class="col-4 form-item">
+                  <label class="form-label">Phone Number</label>
+                  <input v-model="form.customer.phone" type="text" class="form-control" required="" />
+                </div>
+                <div class="col-4 form-item">
+                  <label class="form-label">Email Address</label>
+                  <input v-model="form.customer.email" type="text" class="form-control" required="" />
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-9">
+        <div class="col-5">
           <div class="card">
             <div class="card-header">
               Property Details
             </div>
             <div class="card-body">
-              <div class="row mb-4">
-                <div class="col-3 form-item">
+              <div class="row">
+                <div class="col-6 form-item">
                   <label class="form-label">Property Name</label>
-                  <input v-model="to.name" class="form-control" type="text" />
+                  <input v-model="to.name" class="form-control" type="text" required="" />
                 </div>
-                <div class="col-3 form-item">
+                <div class="col-6 form-item">
                   <label class="form-label">Property Zip</label>
-                  <input v-model="to.zip" class="form-control" type="text" />
+                  <input v-model="to.zip" class="form-control" type="text" required="" />
                 </div>
-                <div class="col-3 form-item">
-                  <label class="form-label">Property Latitude</label>
-                  <input v-model="to.latitude" class="form-control" type="text" />
-                </div>
-                <div class="col-3 form-item">
-                  <label class="form-label">Property Longitude</label>
-                  <input v-model="to.longitude" class="form-control" type="text" />
-                </div>
-              </div>
-              <div class="form-item">
-                <label class="form-label">Property Address</label>
-                <textarea v-model="to.address" class="form-control" rows="4" style="resize:none" />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <google-map style="height:25vw" @click="marker" @mouseover="mouseOver" ref="map"></google-map>
+      <div class="card mt-3">
+        <div class="card-header">
+          Event Details
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-4 form-item">
+              <label class="form-label">Event Date</label>
+              <date-picker v-model="form.date" type="datetime" valueType="YYYY-MM-DD HH:mm:ss"></date-picker>
+            </div>
+            <div class="col-4 form-item">
+              <label class="form-label">Agent</label>
+              <select v-model="agent" class="form-control" required="">
+                <option v-for="agent in agents" :value="agent" v-html="agent.name"></option>
+              </select>
+            </div>
+            <div class="col-4 form-item">
+              <label class="form-label">Starting Office</label>
+              <select v-model="from" class="form-control" required="">
+                <option v-for="office in offices" :value="office" v-html="office.name"></option>
+              </select>
+            </div>
+            <div class="col-12 mt-3"></div>
+            <div class="col-3 form-item">
+              <label class="form-label">ETA</label>
+              <input :value="etaFormatted" class="form-control" type="text" readonly="readonly" />
+            </div>
+            <div class="col-3 form-item">
+              <label class="form-label">Distance</label>
+              <input :value="distanceFormatted" class="form-control" type="text" readonly="readonly" />
+            </div>
+            <div class="col-3 form-item">
+              <label class="form-label">Office Departure Time</label>
+              <input :value="form.departure" class="form-control" type="text" readonly="readonly" />
+            </div>
+            <div class="col-3 form-item">
+              <label class="form-label">Office Arrival Time</label>
+              <input :value="form.arrival" class="form-control" type="text" readonly="readonly" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <google-map class="mt-4" style="height:35vw" :center="map.center" :zoom="map.zoom" @rightclick="marker" ref="map">
+        <google-map-directions v-if="isToValid && isFromValid" :origin="originCoordinates" :destination="destinationCoordinates" preserve-viewport></google-map-directions>
+      </google-map>
+
+      <div class="w-100 text-end mt-4">
+        <button class="btn btn-lg btn-success" type="submit">Save</button>
+      </div>
 
     </form>
   </div>
 </template>
 
 <script>
+  import DatePicker from 'vue2-datepicker';
+  import 'vue2-datepicker/index.css';
+
   export default {
+    components: { DatePicker },
     data(){
       return {
+        agents: [],
         offices: [],
-        from: null,
+        from: {
+          id: null,
+          name: null,
+          zip: null,
+          latitude: null,
+          longitude: null,
+          address: null
+        },
         to: {
+          id: null,
+          name: null,
           zip: null,
           latitude: null,
           longitude: null,
           address: null
         },
         form: {
-          name: null,
-          email: null,
-          phone: null,
-          date: null
+          customer: {
+            name: null,
+            email: null,
+            phone: null
+          },
+          date: null,
+          eta: null,
+          distance: null,
+          departure: null,
+          arrival: null,
+        },
+        agent: {
+          id: null,
+          name: null
+        },
+        delay: null,
+        map: {
+          zoom: 5,
+          center: {
+            lat: 53.80917756087661,
+            lng: -4.839354941476767
+          }
         }
+      }
+    },
+    computed: {
+      isToValid(){
+        return new Boolean((!!this.to.id || !!this.to.zip || this.to.latitude && this.to.longitude)).valueOf();
+      },
+      isFromValid(){
+        return new Boolean((!!this.from.id || !!this.from.zip || this.from.latitude && this.from.longitude)).valueOf();
+      },
+      destinationCoordinates(){
+        return [this.to.latitude, this.to.longitude].join(',');
+      },
+      originCoordinates(){
+        return [this.from.latitude, this.from.longitude].join(',');
+      },
+      markerCoordinates(){
+        return {lat: this.to.latitude, lng: this.to.longitude};
+      },
+      etaFormatted(){
+        return Math.ceil(this.form.eta / 60) +' min(s)';
+      },
+      distanceFormatted(){
+        return (this.form.distance / 1000).toFixed(1) + ' km(s)'
       }
     },
     methods: {
       marker(e){
-        console.log('marker', this.from);
+        setTimeout(async () => {
+          const zip = await this.getCoordinatesZip(e.latLng.lat(), e.latLng.lng());
+          this.to = { ...this.to, zip: zip, latitude: e.latLng.lat(), longitude: e.latLng.lng() };
+        }, 0);
+        e.stop();
+        return false;
       },
-      mouseOver(e){
-        console.log('mouseOver', this.from);
-      },
-      changeFrom(){
+      async submit(){
+        const response = await this.axios.post('/api/appointments', {
+          ...this.form,
+          office_id: this.from.id,
+          agent_id: this.agent.id,
+          property: {
+            name: this.to.name,
+            zip: this.to.zip
+          }
+        });
 
+        this.$toast.success(response.data.message);
+        this.$router.push({name: 'dashboard'});
       },
-      changeTo()
-      {
+      updateDurations(){
+        if (this.form.date && this.form.eta) {
+          this.form.arrival = this.$moment(this.form.date).add((this.form.eta + (60 * 60)), 'second').format('YYYY-MM-DD HH:mm:ss');
+          this.form.departure = this.$moment(this.form.date).subtract(this.form.eta, 'second').format('YYYY-MM-DD HH:mm:ss');
+        }
+      },
+      getDistance(typing = true){
+        clearTimeout(this.delay);
+        if (this.isToValid && this.isFromValid) {
+          this.delay = setTimeout(async () => {
+            try {
+              const response = await this.axios.post('/api/distance', { from: this.from, to: this.to });
+              this.form.eta = response.data.duration;
+              this.form.distance = response.data.distance;
+              this.to = { ...this.to, ...response.data.destination };
 
+              this.updateDurations();
+
+              this.$refs.map.fitBounds(new window.google.maps.LatLngBounds({
+                lat: response.data.bounds.southwest.latitude,
+                lng: response.data.bounds.southwest.longitude
+              }, {
+                lat: response.data.bounds.northeast.latitude,
+                lng: response.data.bounds.northeast.longitude
+              }));
+
+            } catch(e) {
+              this.form.distance = null;
+              this.form.eta = null;
+            }
+          }, (typing ? 1500 : 0));
+        }
+      },
+      async getCoordinatesZip(latitude, longitude){
+        const response = await this.axios.post('/api/location', { latitude, longitude });
+        return response.data.zip;
+      }
+    },
+    watch: {
+      'from.id': function(val, old){
+        this.getDistance();
+      },
+      'from.zip': function(val, old){
+        this.getDistance();
+      },
+      'from.latitude': function(val, old){
+        this.getDistance();
+      },
+      'from.longitude': function(val, old){
+        this.getDistance();
+      },
+      'to.id': function(val, old){
+        this.getDistance();
+      },
+      'to.zip': function(val, old){
+        this.getDistance();
+      },
+      'to.latitude': function(val, old){
+        this.getDistance();
+      },
+      'to.longitude': function(val, old){
+        this.getDistance();
+      },
+      'form.date': function(val, old){
+        this.updateDurations();
       }
     },
     async created(){
-      const response = await this.axios.get('/api/offices');
-      this.offices = response.data;
-      this.from = response.data[0];
+      const offices = await this.axios.get('/api/offices');
+      this.offices = offices.data;
+      this.from = offices.data[0] || this.from;
+
+      const agents = await this.axios.get('/api/agents');
+      this.agents = agents.data;
+      this.agent = agents.data[0] || this.form.agent_id;
     }
   }
 </script>
+
+<style>
+  .mx-datepicker {
+    width: 100%;
+  }
+</style>

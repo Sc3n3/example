@@ -9,8 +9,12 @@ window.Vue = require('vue').default;
 
 import VueRouter from 'vue-router';
 import VueAxios from 'vue-axios';
-import VueGoogleMap from 'vuejs-google-maps'
-import 'vuejs-google-maps/dist/vuejs-google-maps.css'
+import VueMoment from 'vue-moment';
+import VueGoogleMap from 'vuejs-google-maps';
+import VueToast from 'vue-toast-notification';
+
+import 'vue-toast-notification/dist/theme-default.css';
+import 'vuejs-google-maps/dist/vuejs-google-maps.css';
 
 import App from './components/App.vue';
 import routes from './routes.js';
@@ -27,11 +31,15 @@ import routes from './routes.js';
 //files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.use(VueRouter);
+Vue.use(VueMoment);
 Vue.use(VueAxios, window.axios);
+Vue.use(VueToast, {
+    position: 'top-right'
+});
 Vue.use(VueGoogleMap, {
     load: {
         apiKey: process.env.MIX_GOOGLE_API_KEY,
-        libraries: ['places', 'directions']
+        libraries: ['places', 'visualization']
     }
 });
 
@@ -61,7 +69,6 @@ const app = new Vue({
             token ? window.localStorage.setItem('token', token)
                   : window.localStorage.removeItem('token');
         },
-
         getStoredAccessToken(){
             return window.localStorage.getItem('token');
         },
@@ -77,7 +84,7 @@ const app = new Vue({
         },
         logout(){
             this.setUser(null);
-            this.$router.push('/login');
+            this.$router.push({name: 'login'});
         },
         async fetchUser(){
             const response = await this.axios.get('/api/user/me');
@@ -101,7 +108,7 @@ const app = new Vue({
         this.$router.beforeEach((to, from, next) => {
             if (to.matched.some(route => route.meta.auth)) {
                 if (!this.auth.user) {
-                    return next('/login');
+                    return next({name: 'login'});
                 }
             }
             return next();
@@ -125,6 +132,10 @@ const app = new Vue({
                     return this.refreshToken().then((token) => {
                         this.setAccessToken(token);
                         return this.axios(err.config);
+                    }).catch((err) => {
+                        this.$toast.warning('You need to sign in to view the page.');
+                        this.$router.push({name: 'login'});
+                        return err;
                     });
                 } else if (err.config.url.includes('user/refresh') && err.config.retryRequest) {
                     this.logout();
@@ -137,7 +148,7 @@ const app = new Vue({
                     })
                 ];
 
-                alert(message.join("\n"));
+                this.$toast.error(message.join("\n"));
             }
             this.ui.loading = false;
             return Promise.reject(err);
