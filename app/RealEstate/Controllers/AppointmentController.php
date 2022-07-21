@@ -26,11 +26,32 @@ class AppointmentController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Appointment::all());
+        $query = $this->repository->query();
+        $query->with(['contact', 'agent', 'property', 'office']);
+
+        if (is_array($request->input('query'))) {
+            foreach ($request->input('query') as $key => $value) {
+                if (in_array($key, ['start_date', 'end_date'])) {
+                    $operator = ($key === 'start_date' ? '>=' : '<=');
+                    $query->where('date', $operator, $value);
+                } else {
+                    $query->where($key, $value);
+                }
+            }
+        }
+
+        if (is_array($request->input('order'))) {
+            foreach ($request->input('order') as $key => $value) {
+                $query->orderBy($key, $value);
+            }
+        }
+
+        return response()->json($this->repository->search($query));
     }
 
     /**
@@ -39,6 +60,7 @@ class AppointmentController extends Controller
      */
     public function show(Appointment $appointment)
     {
+        $appointment->load(['contact', 'agent', 'property', 'office']);
         return response()->json($appointment);
     }
 
