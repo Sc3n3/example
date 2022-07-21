@@ -5720,12 +5720,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     originCoordinates: function originCoordinates() {
       return [this.from.latitude, this.from.longitude].join(',');
     },
-    markerCoordinates: function markerCoordinates() {
-      return {
-        lat: this.to.latitude,
-        lng: this.to.longitude
-      };
-    },
     etaFormatted: function etaFormatted() {
       return Math.ceil(this.form.eta / 60) + ' min(s)';
     },
@@ -5753,8 +5747,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   latitude: e.latLng.lat(),
                   longitude: e.latLng.lng()
                 });
+                console.log(_this.to);
 
-              case 4:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -31258,7 +31253,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
-      _c("td", { staticClass: "text-center", attrs: { colspan: "11" } }, [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "12" } }, [
         _vm._v("No appointments available."),
       ]),
     ])

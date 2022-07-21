@@ -168,9 +168,6 @@
       originCoordinates(){
         return [this.from.latitude, this.from.longitude].join(',');
       },
-      markerCoordinates(){
-        return {lat: this.to.latitude, lng: this.to.longitude};
-      },
       etaFormatted(){
         return Math.ceil(this.form.eta / 60) +' min(s)';
       },
@@ -183,7 +180,9 @@
         setTimeout(async () => {
           const zip = await this.getCoordinatesZip(e.latLng.lat(), e.latLng.lng());
           this.to = { ...this.to, zip: zip, latitude: e.latLng.lat(), longitude: e.latLng.lng() };
+          console.log(this.to)
         }, 0);
+
         e.stop();
         return false;
       },
@@ -241,7 +240,10 @@
         }
       },
       async getCoordinatesZip(latitude, longitude){
-        const response = await this.axios.post('/api/location', { latitude, longitude });
+        const response = await this.axios.post('/api/location', {
+          latitude: latitude,
+          longitude: longitude
+        });
         return response.data.zip;
       }
     },

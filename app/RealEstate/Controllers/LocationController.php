@@ -24,12 +24,12 @@ class LocationController extends Controller
         $info = [];
 
         foreach (['from', 'to'] as $field) {
-            if ($request->input($field .'.id')) {
+            if ($request->input($field .'.zip')) {
+                $info[$field] = (new Location())->setZip($request->input($field .'.zip'));
+            } else if ($request->input($field .'.id')) {
                 $info[$field] = ($field === 'from' ? new Office() : new Property())
                     ->findOrFail($request->input('from.id'))
                     ->getDto();
-            } else if ($request->input($field .'.zip')) {
-                $info[$field] = (new Location())->setZip($request->input($field .'.zip'));
             } else {
                 $info[$field] = (new Location())
                     ->setLatitude($request->input($field .'.latitude'))
