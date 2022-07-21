@@ -2,6 +2,8 @@
 
 namespace App\RealEstate\Models\Traits;
 
+use App\RealEstate\Models\Dtos\Location;
+
 trait LocationAble
 {
     /**
@@ -15,14 +17,6 @@ trait LocationAble
     }
 
     /**
-     * @return mixed
-     */
-    public function getLatitude()
-    {
-        return $this->latitude;
-    }
-
-    /**
      * @param $longitude
      * @return $this
      */
@@ -33,10 +27,66 @@ trait LocationAble
     }
 
     /**
+     * @param $address
+     * @return $this
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+        return $this;
+    }
+
+    /**
+     * @param $zip
+     * @return $this
+     */
+    public function setZip($zip)
+    {
+        $this->zip = $zip;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
      * @return mixed
      */
     public function getLongitude()
     {
         return $this->longitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getZip()
+    {
+        return $this->zip;
+    }
+
+    /**
+     * @return Location
+     */
+    public function getDto()
+    {
+        return (new Location())
+            ->setLatitude($this->getLatitude())
+            ->setLongitude($this->getLongitude())
+            ->setAddress($this->getAddress())
+            ->setZip($this->getZip());
     }
 }
