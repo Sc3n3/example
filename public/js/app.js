@@ -5653,6 +5653,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5747,9 +5750,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   latitude: e.latLng.lat(),
                   longitude: e.latLng.lng()
                 });
-                console.log(_this.to);
 
-              case 5:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -5763,8 +5765,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var data, _response, _response2;
-
+        var data, response;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -5777,35 +5778,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     zip: _this2.to.zip
                   }
                 });
+                response = {};
 
                 if (!_this2.form.id) {
-                  _context2.next = 7;
+                  _context2.next = 8;
                   break;
                 }
 
-                _context2.next = 4;
+                _context2.next = 5;
                 return _this2.axios.put('/api/appointments/' + _this2.form.id, data);
 
-              case 4:
-                _response = _context2.sent;
-                _context2.next = 10;
+              case 5:
+                response = _context2.sent;
+                _context2.next = 11;
                 break;
 
-              case 7:
-                _context2.next = 9;
+              case 8:
+                _context2.next = 10;
                 return _this2.axios.post('/api/appointments', data);
 
-              case 9:
-                _response2 = _context2.sent;
-
               case 10:
+                response = _context2.sent;
+
+              case 11:
                 _this2.$toast.success(response.data.message);
 
                 _this2.$router.push({
                   name: 'dashboard'
                 });
 
-              case 12:
+              case 13:
               case "end":
                 return _context2.stop();
             }
@@ -5827,8 +5829,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       if (this.isToValid && this.isFromValid) {
         this.delay = setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-          var _response3;
-
+          var response;
           return _regeneratorRuntime().wrap(function _callee3$(_context3) {
             while (1) {
               switch (_context3.prev = _context3.next) {
@@ -5841,19 +5842,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
 
                 case 3:
-                  _response3 = _context3.sent;
-                  _this3.form.eta = _response3.data.duration;
-                  _this3.form.distance = _response3.data.distance;
-                  _this3.to = _objectSpread(_objectSpread({}, _this3.to), _response3.data.destination);
+                  response = _context3.sent;
+                  _this3.form.eta = response.data.duration;
+                  _this3.form.distance = response.data.distance;
+                  _this3.to = _objectSpread(_objectSpread({}, _this3.to), response.data.destination);
 
                   _this3.updateDurations();
 
                   _this3.$refs.map.fitBounds(new window.google.maps.LatLngBounds({
-                    lat: _response3.data.bounds.southwest.latitude,
-                    lng: _response3.data.bounds.southwest.longitude
+                    lat: response.data.bounds.southwest.latitude,
+                    lng: response.data.bounds.southwest.longitude
                   }, {
-                    lat: _response3.data.bounds.northeast.latitude,
-                    lng: _response3.data.bounds.northeast.longitude
+                    lat: response.data.bounds.northeast.latitude,
+                    lng: response.data.bounds.northeast.longitude
                   }));
 
                   _context3.next = 15;
@@ -31676,10 +31677,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-100 text-end mt-4" }, [
+    return _c("div", { staticClass: "w-100 mt-4 clearfix" }, [
+      _c("div", { staticClass: "form-text float-start" }, [
+        _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+        _vm._v(
+          " You can use right click to select location on the map.\n      "
+        ),
+      ]),
+      _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-lg btn-success", attrs: { type: "submit" } },
+        {
+          staticClass: "btn btn-lg btn-success float-end",
+          attrs: { type: "submit" },
+        },
         [_vm._v("Save")]
       ),
     ])

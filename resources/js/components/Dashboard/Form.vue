@@ -93,8 +93,11 @@
         <google-map-directions v-if="isToValid && isFromValid" :origin="originCoordinates" :destination="destinationCoordinates" preserve-viewport></google-map-directions>
       </google-map>
 
-      <div class="w-100 text-end mt-4">
-        <button class="btn btn-lg btn-success" type="submit">Save</button>
+      <div class="w-100 mt-4 clearfix">
+        <div class="form-text float-start">
+          <span class="text-danger">*</span> You can use right click to select location on the map.
+        </div>
+        <button class="btn btn-lg btn-success float-end" type="submit">Save</button>
       </div>
 
     </form>
@@ -180,7 +183,6 @@
         setTimeout(async () => {
           const zip = await this.getCoordinatesZip(e.latLng.lat(), e.latLng.lng());
           this.to = { ...this.to, zip: zip, latitude: e.latLng.lat(), longitude: e.latLng.lng() };
-          console.log(this.to)
         }, 0);
 
         e.stop();
@@ -197,10 +199,12 @@
           }
         };
 
+        let response = {};
+
         if (this.form.id) {
-          let response = await this.axios.put('/api/appointments/'+ this.form.id, data);
+          response = await this.axios.put('/api/appointments/'+ this.form.id, data);
         } else {
-          let response = await this.axios.post('/api/appointments', data);
+          response = await this.axios.post('/api/appointments', data);
         }
 
         this.$toast.success(response.data.message);
