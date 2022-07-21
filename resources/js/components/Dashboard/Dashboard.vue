@@ -46,7 +46,7 @@
               <th scope="row">{{ event.id }}</th>
               <td class="text-center">
                 <span v-if="isValid(event.date)" class="badge rounded-circle bg-success">&nbsp;</span>
-                <span v-if="!isValid(event.date)" class="badge rounded-circle bg-danger">&nbsp</span>
+                <span v-if="!isValid(event.date)" class="badge rounded-circle bg-danger">&nbsp;</span>
               </td>
               <td>{{ event.date }}</td>
               <td>
