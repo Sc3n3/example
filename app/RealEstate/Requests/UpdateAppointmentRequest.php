@@ -22,7 +22,7 @@ class UpdateAppointmentRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'id' => $this->route()->parameter('id')
+            'id' => $this->route()->parameter('appointment')
         ]);
     }
 
@@ -41,10 +41,10 @@ class UpdateAppointmentRequest extends FormRequest
             'property.zip' => 'required|string',
             'agent_id' => 'required|exists:users,id',
             'office_id' => 'required|exists:offices,id',
-            'customer' => 'required|array',
-            'customer.name' => 'required|string',
-            'customer.email' => 'required|email',
-            'customer.phone' => 'required|numeric',
+            'contact' => 'required|array',
+            'contact.name' => 'required|string',
+            'contact.email' => 'required|email',
+            'contact.phone' => 'required|numeric',
         ];
     }
 }

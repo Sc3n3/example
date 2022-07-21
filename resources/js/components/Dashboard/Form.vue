@@ -11,15 +11,15 @@
               <div class="row justify-content-center">
                 <div class="col-4 form-item">
                   <label class="form-label">Full Name</label>
-                  <input v-model="form.customer.name" type="text" class="form-control" required="" />
+                  <input v-model="form.contact.name" type="text" class="form-control" required="" />
                 </div>
                 <div class="col-4 form-item">
                   <label class="form-label">Phone Number</label>
-                  <input v-model="form.customer.phone" type="text" class="form-control" required="" />
+                  <input v-model="form.contact.phone" type="text" class="form-control" required="" />
                 </div>
                 <div class="col-4 form-item">
                   <label class="form-label">Email Address</label>
-                  <input v-model="form.customer.email" type="text" class="form-control" required="" />
+                  <input v-model="form.contact.email" type="text" class="form-control" required="" />
                 </div>
               </div>
             </div>
@@ -58,13 +58,13 @@
             </div>
             <div class="col-4 form-item">
               <label class="form-label">Agent</label>
-              <select v-model="agent" class="form-control" required="">
+              <select v-model="agent" class="form-control form-select" required="">
                 <option v-for="agent in agents" :value="agent" v-html="agent.name"></option>
               </select>
             </div>
             <div class="col-4 form-item">
               <label class="form-label">Starting Office</label>
-              <select v-model="from" class="form-control" required="">
+              <select v-model="from" class="form-control form-select" required="">
                 <option v-for="office in offices" :value="office" v-html="office.name"></option>
               </select>
             </div>
@@ -128,7 +128,9 @@
           address: null
         },
         form: {
-          customer: {
+          id: null,
+          contact: {
+            id: null,
             name: null,
             email: null,
             phone: null
@@ -173,7 +175,7 @@
         return Math.ceil(this.form.eta / 60) +' min(s)';
       },
       distanceFormatted(){
-        return (this.form.distance / 1000).toFixed(1) + ' km(s)'
+        return (this.form.distance / 1000).toFixed(1) + ' km(s)';
       }
     },
     methods: {
@@ -186,7 +188,7 @@
         return false;
       },
       async submit(){
-        const response = await this.axios.post('/api/appointments', {
+        const data = {
           ...this.form,
           office_id: this.from.id,
           agent_id: this.agent.id,
@@ -194,10 +196,16 @@
             name: this.to.name,
             zip: this.to.zip
           }
-        });
+        };
+
+        if (this.form.id) {
+          let response = await this.axios.put('/api/appointments/'+ this.form.id, data);
+        } else {
+          let response = await this.axios.post('/api/appointments', data);
+        }
 
         this.$toast.success(response.data.message);
-        this.$router.push({name: 'dashboard'});
+        this.$router.push({ name: 'dashboard' });
       },
       updateDurations(){
         if (this.form.date && this.form.eta) {
@@ -274,6 +282,22 @@
       const agents = await this.axios.get('/api/agents');
       this.agents = agents.data;
       this.agent = agents.data[0] || this.form.agent_id;
+    },
+    async mounted(){
+      if (this.$route.params.id) {
+        const appointment = await this.axios.get('/api/appointments/'+ this.$route.params.id);
+        this.to = appointment.data.property;
+        this.from = appointment.data.office;
+        this.form = {
+          id: appointment.data.id,
+          contact: appointment.data.contact,
+          date: appointment.data.date,
+          eta: appointment.data.eta,
+          distance: appointment.data.distance,
+          departure: appointment.data.departure,
+          arrival: appointment.data.arrival
+        };
+      }
     }
   }
 </script>

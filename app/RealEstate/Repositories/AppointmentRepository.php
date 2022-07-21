@@ -6,6 +6,7 @@ use App\RealEstate\Events\AppointmentCreated;
 use App\RealEstate\Events\AppointmentDeleted;
 use App\RealEstate\Events\AppointmentUpdated;
 use App\RealEstate\Models\Appointment;
+use App\RealEstate\Models\Contact;
 use App\RealEstate\Models\Office;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -53,15 +54,28 @@ class AppointmentRepository extends BaseRepository
             $property = $this->propertyRepository()->search(
                 $this->propertyRepository()->query()->where('zip', $details['property']['zip'])
             )->firstOrFail();
-        } catch (\Exception $e) {
+        } catch (ModelNotFoundException $e) {
             $property = $this->propertyRepository()->create($details['property']);
         }
 
+        try {
+            $contact = Contact::where('phone', $details['contact']['phone'])
+                ->orWhere('email', $details['contact']['email'])
+                ->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            $contact = new Contact();
+        }
+
+        // Update contact details
+        $contact->fill($details['contact']);
+        $contact->save();
+
         $details['office_id'] = $office->getKey();
+        $details['contact_id'] = $contact->getKey();
         $details['property_id'] = $property->getKey();
 
         $appointment = $this->model();
-        $appointment->fill(collect($details)->except('property', 'customer')->toArray());
+        $appointment->fill(collect($details)->except('property', 'contact')->toArray());
         $appointment->save();
 
         event(new AppointmentCreated($appointment));
@@ -89,11 +103,20 @@ class AppointmentRepository extends BaseRepository
             $property = $this->propertyRepository()->create($details['property']);
         }
 
+        try {
+            $contact = Contact::where('phone', $details['contact']['phone'])
+                ->orWhere('email', $details['contact']['email'])
+                ->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            $contact = new Contact();
+        }
+
         $details['office_id'] = $office->getKey();
+        $details['contact_id'] = $contact->getKey();
         $details['property_id'] = $property->getKey();
 
         $appointment = $this->get($id);
-        $appointment->fill(collect($details)->except('property', 'customer')->toArray());
+        $appointment->fill(collect($details)->except('property', 'contact')->toArray());
         $appointment->save();
 
         event(new AppointmentUpdated($appointment));

@@ -5266,9 +5266,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vue2_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-datepicker */ "./node_modules/vue2-datepicker/index.esm.js");
+/* harmony import */ var vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-datepicker/index.css */ "./node_modules/vue2-datepicker/index.css");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -5315,9 +5335,66 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    DatePicker: vue2_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
+      query: {
+        creator_id: null,
+        start_date: null,
+        end_date: null
+      },
+      order: {
+        date: 'asc'
+      },
+      agents: [],
       appointments: []
     };
   },
@@ -5327,32 +5404,120 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var filters, response;
+        var filters, sort, order, query, response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 filters = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : {};
-                _context.next = 3;
+                sort = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : {};
+                order = Object.fromEntries(Object.entries(sort).map(function (_ref) {
+                  var _ref2 = _slicedToArray(_ref, 2),
+                      key = _ref2[0],
+                      value = _ref2[1];
+
+                  return ['order[' + key + ']', value];
+                }));
+                query = Object.fromEntries(Object.entries(filters).map(function (_ref3) {
+                  var _ref4 = _slicedToArray(_ref3, 2),
+                      key = _ref4[0],
+                      value = _ref4[1];
+
+                  return ['query[' + key + ']', value];
+                }));
+                _context.next = 6;
                 return _this.axios.get('/api/appointments', {
-                  query: filters
+                  params: _objectSpread(_objectSpread({}, query), order)
                 });
 
-              case 3:
+              case 6:
                 response = _context.sent;
                 _this.appointments = response.data;
 
-              case 5:
+              case 8:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    },
+    isValid: function isValid(date) {
+      return this.$moment().isSameOrBefore(date);
+    },
+    remove: function remove(event) {
+      var _this2 = this;
+
+      if (confirm('Are you sure want to delete?')) {
+        this.axios["delete"]('/api/appointments/' + event.id).then(function (resp) {
+          _this2.$toast.success(resp.data.message);
+
+          _this2.getAppointments(_this2.query, _this2.order);
+        })["catch"](function (err) {
+          _this2.$toast.error('Appointment could not deleted.');
+        });
+      }
+    },
+    edit: function edit(event) {
+      this.$router.push({
+        name: 'update',
+        params: {
+          id: event.id
+        }
+      });
+    },
+    convertDistance: function convertDistance(distance) {
+      return (distance / 1000).toFixed(1) + ' km(s)';
+    },
+    convertDuration: function convertDuration(duration) {
+      return Math.ceil(duration / 60) + ' min(s)';
+    }
+  },
+  watch: {
+    query: {
+      handler: function handler(val, old) {
+        this.getAppointments(this.query, this.order);
+      },
+      deep: true
     }
   },
   created: function created() {
-    this.getAppointments();
+    var _this3 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var agents;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _this3.axios.get('/api/agents');
+
+            case 2:
+              agents = _context2.sent;
+              _this3.agents = agents.data;
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
+  },
+  mounted: function mounted() {
+    (function getAppointments(app) {
+      if (app.$root.auth.user) {
+        app.query = _objectSpread(_objectSpread({}, app.query), {}, {
+          creator_id: app.$root.auth.user.id,
+          start_date: app.$moment().format('YYYY-MM-DD HH:mm:00')
+        });
+      } else {
+        setTimeout(function () {
+          return getAppointments(app);
+        }, 1000);
+      }
+    })(this);
   }
 });
 
@@ -5515,7 +5680,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         address: null
       },
       form: {
-        customer: {
+        id: null,
+        contact: {
+          id: null,
           name: null,
           email: null,
           phone: null
@@ -5601,31 +5768,49 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var response;
+        var data, _response, _response2;
+
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
-                return _this2.axios.post('/api/appointments', _objectSpread(_objectSpread({}, _this2.form), {}, {
+                data = _objectSpread(_objectSpread({}, _this2.form), {}, {
                   office_id: _this2.from.id,
                   agent_id: _this2.agent.id,
                   property: {
                     name: _this2.to.name,
                     zip: _this2.to.zip
                   }
-                }));
+                });
 
-              case 2:
-                response = _context2.sent;
+                if (!_this2.form.id) {
+                  _context2.next = 7;
+                  break;
+                }
 
+                _context2.next = 4;
+                return _this2.axios.put('/api/appointments/' + _this2.form.id, data);
+
+              case 4:
+                _response = _context2.sent;
+                _context2.next = 10;
+                break;
+
+              case 7:
+                _context2.next = 9;
+                return _this2.axios.post('/api/appointments', data);
+
+              case 9:
+                _response2 = _context2.sent;
+
+              case 10:
                 _this2.$toast.success(response.data.message);
 
                 _this2.$router.push({
                   name: 'dashboard'
                 });
 
-              case 5:
+              case 12:
               case "end":
                 return _context2.stop();
             }
@@ -5647,7 +5832,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       if (this.isToValid && this.isFromValid) {
         this.delay = setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-          var response;
+          var _response3;
+
           return _regeneratorRuntime().wrap(function _callee3$(_context3) {
             while (1) {
               switch (_context3.prev = _context3.next) {
@@ -5660,19 +5846,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
 
                 case 3:
-                  response = _context3.sent;
-                  _this3.form.eta = response.data.duration;
-                  _this3.form.distance = response.data.distance;
-                  _this3.to = _objectSpread(_objectSpread({}, _this3.to), response.data.destination);
+                  _response3 = _context3.sent;
+                  _this3.form.eta = _response3.data.duration;
+                  _this3.form.distance = _response3.data.distance;
+                  _this3.to = _objectSpread(_objectSpread({}, _this3.to), _response3.data.destination);
 
                   _this3.updateDurations();
 
                   _this3.$refs.map.fitBounds(new window.google.maps.LatLngBounds({
-                    lat: response.data.bounds.southwest.latitude,
-                    lng: response.data.bounds.southwest.longitude
+                    lat: _response3.data.bounds.southwest.latitude,
+                    lng: _response3.data.bounds.southwest.longitude
                   }, {
-                    lat: response.data.bounds.northeast.latitude,
-                    lng: response.data.bounds.northeast.longitude
+                    lat: _response3.data.bounds.northeast.latitude,
+                    lng: _response3.data.bounds.northeast.longitude
                   }));
 
                   _context3.next = 15;
@@ -5780,6 +5966,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }
       }, _callee5);
+    }))();
+  },
+  mounted: function mounted() {
+    var _this6 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+      var appointment;
+      return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              if (!_this6.$route.params.id) {
+                _context6.next = 7;
+                break;
+              }
+
+              _context6.next = 3;
+              return _this6.axios.get('/api/appointments/' + _this6.$route.params.id);
+
+            case 3:
+              appointment = _context6.sent;
+              _this6.to = appointment.data.property;
+              _this6.from = appointment.data.office;
+              _this6.form = {
+                id: appointment.data.id,
+                contact: appointment.data.contact,
+                date: appointment.data.date,
+                eta: appointment.data.eta,
+                distance: appointment.data.distance,
+                departure: appointment.data.departure,
+                arrival: appointment.data.arrival
+              };
+
+            case 7:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
     }))();
   }
 });
@@ -30771,6 +30996,99 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container mt-4" }, [
+    _c("div", { staticClass: "card mb-4" }, [
+      _c("div", { staticClass: "card-header" }, [_vm._v("Filters")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-4 form-item" }, [
+            _c("label", { staticClass: "form-label" }, [_vm._v("Creator")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.query.creator_id,
+                    expression: "query.creator_id",
+                  },
+                ],
+                staticClass: "form-control form-select",
+                attrs: { required: "" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.query,
+                      "creator_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
+                },
+              },
+              _vm._l(_vm.agents, function (agent) {
+                return _c("option", {
+                  domProps: { value: agent.id, innerHTML: _vm._s(agent.name) },
+                })
+              }),
+              0
+            ),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-4 form-item" },
+            [
+              _c("label", { staticClass: "form-label" }, [
+                _vm._v("Start Date"),
+              ]),
+              _vm._v(" "),
+              _c("date-picker", {
+                attrs: { type: "datetime", valueType: "YYYY-MM-DD HH:mm:ss" },
+                model: {
+                  value: _vm.query.start_date,
+                  callback: function ($$v) {
+                    _vm.$set(_vm.query, "start_date", $$v)
+                  },
+                  expression: "query.start_date",
+                },
+              }),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-4 form-item" },
+            [
+              _c("label", { staticClass: "form-label" }, [_vm._v("End Date")]),
+              _vm._v(" "),
+              _c("date-picker", {
+                attrs: { type: "datetime", valueType: "YYYY-MM-DD HH:mm:ss" },
+                model: {
+                  value: _vm.query.end_date,
+                  callback: function ($$v) {
+                    _vm.$set(_vm.query, "end_date", $$v)
+                  },
+                  expression: "query.end_date",
+                },
+              }),
+            ],
+            1
+          ),
+        ]),
+      ]),
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "card-header" }, [_vm._v("Appointments")]),
       _vm._v(" "),
@@ -30779,36 +31097,124 @@ var render = function () {
           "table",
           {
             staticClass:
-              "table table-striped table-hover table-sm align-middle",
+              "table table-striped table-hover align-middle text-center",
           },
           [
             _vm._m(0),
             _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.appointments, function (event) {
-                return _c("tr", [
-                  _c("td", [_vm._v(_vm._s(event.date))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(event.customer_id))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(event.agent_id))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(event.property_id))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(event.distance))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(event.eta))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(event.departure))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(event.arrival))]),
-                  _vm._v(" "),
-                  _vm._m(1, true),
-                ])
-              }),
-              0
-            ),
+            _vm.appointments.length
+              ? _c(
+                  "tbody",
+                  _vm._l(_vm.appointments, function (event) {
+                    return _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v(_vm._s(event.id)),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _vm.isValid(event.date)
+                          ? _c(
+                              "span",
+                              {
+                                staticClass: "badge rounded-circle bg-success",
+                              },
+                              [_vm._v(" ")]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        !_vm.isValid(event.date)
+                          ? _c(
+                              "span",
+                              { staticClass: "badge rounded-circle bg-danger" },
+                              [_vm._v(" ")]
+                            )
+                          : _vm._e(),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(event.date))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        event.contact
+                          ? _c("span", [
+                              _vm._v(
+                                _vm._s(event.contact.name) +
+                                  " (" +
+                                  _vm._s(event.contact.phone) +
+                                  ")"
+                              ),
+                            ])
+                          : _vm._e(),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        event.agent
+                          ? _c("span", [_vm._v(_vm._s(event.agent.name))])
+                          : _vm._e(),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        event.office
+                          ? _c("span", [_vm._v(_vm._s(event.office.name))])
+                          : _vm._e(),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        event.property
+                          ? _c("span", [
+                              _vm._v(
+                                _vm._s(event.property.name) +
+                                  " (" +
+                                  _vm._s(event.property.zip) +
+                                  ")"
+                              ),
+                            ])
+                          : _vm._e(),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(_vm._s(_vm.convertDistance(event.distance))),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(_vm._s(_vm.convertDuration(event.eta))),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(event.departure))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(event.arrival))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-sm btn-info",
+                            on: {
+                              click: function ($event) {
+                                return _vm.edit(event)
+                              },
+                            },
+                          },
+                          [_vm._v("Edit")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-sm btn-danger",
+                            on: {
+                              click: function ($event) {
+                                return _vm.remove(event)
+                              },
+                            },
+                          },
+                          [_vm._v("Remove")]
+                        ),
+                      ]),
+                    ])
+                  }),
+                  0
+                )
+              : _c("tbody", [_vm._m(1)]),
           ]
         ),
       ]),
@@ -30822,23 +31228,31 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Date")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Customer")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Agent")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Date")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Property")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Contact")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Distance")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Agent")]),
         _vm._v(" "),
-        _c("th", [_vm._v("ETA")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Office")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Time to Leave Office")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Property")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Time to Return Office")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Distance")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Actions")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ETA")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Time to Leave Office")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("Time to Return Office"),
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
       ]),
     ])
   },
@@ -30846,11 +31260,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-sm btn-info" }, [_vm._v("Edit")]),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn btn-sm btn-danger" }, [
-        _vm._v("Remove"),
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "11" } }, [
+        _vm._v("No appointments available."),
       ]),
     ])
   },
@@ -30909,20 +31321,20 @@ var render = function () {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.customer.name,
-                          expression: "form.customer.name",
+                          value: _vm.form.contact.name,
+                          expression: "form.contact.name",
                         },
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text", required: "" },
-                      domProps: { value: _vm.form.customer.name },
+                      domProps: { value: _vm.form.contact.name },
                       on: {
                         input: function ($event) {
                           if ($event.target.composing) {
                             return
                           }
                           _vm.$set(
-                            _vm.form.customer,
+                            _vm.form.contact,
                             "name",
                             $event.target.value
                           )
@@ -30941,20 +31353,20 @@ var render = function () {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.customer.phone,
-                          expression: "form.customer.phone",
+                          value: _vm.form.contact.phone,
+                          expression: "form.contact.phone",
                         },
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text", required: "" },
-                      domProps: { value: _vm.form.customer.phone },
+                      domProps: { value: _vm.form.contact.phone },
                       on: {
                         input: function ($event) {
                           if ($event.target.composing) {
                             return
                           }
                           _vm.$set(
-                            _vm.form.customer,
+                            _vm.form.contact,
                             "phone",
                             $event.target.value
                           )
@@ -30973,20 +31385,20 @@ var render = function () {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.customer.email,
-                          expression: "form.customer.email",
+                          value: _vm.form.contact.email,
+                          expression: "form.contact.email",
                         },
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text", required: "" },
-                      domProps: { value: _vm.form.customer.email },
+                      domProps: { value: _vm.form.contact.email },
                       on: {
                         input: function ($event) {
                           if ($event.target.composing) {
                             return
                           }
                           _vm.$set(
-                            _vm.form.customer,
+                            _vm.form.contact,
                             "email",
                             $event.target.value
                           )
@@ -31114,7 +31526,7 @@ var render = function () {
                         expression: "agent",
                       },
                     ],
-                    staticClass: "form-control",
+                    staticClass: "form-control form-select",
                     attrs: { required: "" },
                     on: {
                       change: function ($event) {
@@ -31157,7 +31569,7 @@ var render = function () {
                         expression: "from",
                       },
                     ],
-                    staticClass: "form-control",
+                    staticClass: "form-control form-select",
                     attrs: { required: "" },
                     on: {
                       change: function ($event) {

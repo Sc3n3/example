@@ -10,7 +10,7 @@ Route::prefix('/appointments')->group(function(){
     Route::get('/', 'AppointmentController@index');
     Route::post('/', 'AppointmentController@store');
     Route::get('/{appointment}', 'AppointmentController@show');
-    Route::patch('/{appointment}', 'AppointmentController@update');
+    Route::put('/{appointment}', 'AppointmentController@update');
     Route::delete('/{appointment}', 'AppointmentController@destroy');
 });
 

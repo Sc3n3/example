@@ -30,10 +30,10 @@ class CreateAppointmentRequest extends FormRequest
             'property.zip' => 'required|string',
             'agent_id' => 'required|exists:users,id',
             'office_id' => 'required|exists:offices,id',
-            'customer' => 'required|array',
-            'customer.name' => 'required|string',
-            'customer.email' => 'required|email',
-            'customer.phone' => 'required|numeric',
+            'contact' => 'required|array',
+            'contact.name' => 'required|string',
+            'contact.email' => 'required|email',
+            'contact.phone' => 'required|numeric',
         ];
     }
 }
