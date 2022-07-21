@@ -9,7 +9,7 @@ use App\RealEstate\Models\Appointment;
 use App\RealEstate\Models\Contact;
 use App\RealEstate\Models\Office;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\ItemNotFoundException;
 
 class AppointmentRepository extends BaseRepository
 {
@@ -54,7 +54,7 @@ class AppointmentRepository extends BaseRepository
             $property = $this->propertyRepository()->search(
                 $this->propertyRepository()->query()->where('zip', $details['property']['zip'])
             )->firstOrFail();
-        } catch (ModelNotFoundException $e) {
+        } catch (ItemNotFoundException $e) {
             $property = $this->propertyRepository()->create($details['property']);
         }
 
@@ -62,7 +62,7 @@ class AppointmentRepository extends BaseRepository
             $contact = Contact::where('phone', $details['contact']['phone'])
                 ->orWhere('email', $details['contact']['email'])
                 ->firstOrFail();
-        } catch (ModelNotFoundException $e) {
+        } catch (ItemNotFoundException $e) {
             $contact = new Contact();
         }
 
@@ -98,8 +98,8 @@ class AppointmentRepository extends BaseRepository
         try {
             $property = $this->propertyRepository()->search(
                 $this->propertyRepository()->query()->where('zip', $details['property']['zip'])
-            )->first();
-        } catch (\Exception $e) {
+            )->firstOrFail();
+        } catch (ItemNotFoundException $e) {
             $property = $this->propertyRepository()->create($details['property']);
         }
 
@@ -107,7 +107,7 @@ class AppointmentRepository extends BaseRepository
             $contact = Contact::where('phone', $details['contact']['phone'])
                 ->orWhere('email', $details['contact']['email'])
                 ->firstOrFail();
-        } catch (ModelNotFoundException $e) {
+        } catch (ItemNotFoundException $e) {
             $contact = new Contact();
         }
 
