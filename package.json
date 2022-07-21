@@ -24,8 +24,11 @@
         "vue": "^2.6.12",
         "vue-axios": "^3.4.1",
         "vue-loader": "^15.9.8",
+        "vue-moment": "^4.1.0",
         "vue-router": "^3.5.4",
         "vue-template-compiler": "^2.6.12",
+        "vue-toast-notification": "^0.6.3",
+        "vue2-datepicker": "^3.11.0",
         "vuejs-google-maps": "^0.2.0"
     }
 }
