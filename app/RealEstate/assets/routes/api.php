@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('/appointments')->group(function(){
-    Route::get('/distance', 'AppointmentController@distance');
+Route::post('/zip', 'LocationController@zipInfo');
+Route::post('/location', 'LocationController@zipInfo');
+Route::post('/distance', 'LocationController@distance');
 
+Route::prefix('/appointments')->group(function(){
     Route::get('/', 'AppointmentController@index');
     Route::post('/', 'AppointmentController@store');
     Route::get('/{appointment}', 'AppointmentController@show');
@@ -14,16 +16,14 @@ Route::prefix('/appointments')->group(function(){
 
 Route::prefix('/offices')->group(function(){
     Route::get('/', 'OfficeController@index');
-    Route::post('/', 'OfficeController@store');
     Route::get('/{office}', 'OfficeController@show');
-    Route::patch('/{office}', 'OfficeController@update');
-    Route::delete('/{office}', 'OfficeController@destroy');
 });
 
 Route::prefix('/properties')->group(function(){
     Route::get('/', 'OfficeController@index');
-    Route::post('/', 'OfficeController@store');
     Route::get('/{property}', 'OfficeController@show');
-    Route::patch('/{property}', 'OfficeController@update');
-    Route::delete('/{property}', 'OfficeController@destroy');
+});
+
+Route::prefix('/agents')->group(function(){
+    Route::get('/', 'AgentController@index');
 });
