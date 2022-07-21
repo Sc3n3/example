@@ -258,9 +258,6 @@
       'from.longitude': function(val, old){
         this.getDistance();
       },
-      'to.id': function(val, old){
-        this.getDistance();
-      },
       'to.zip': function(val, old){
         this.getDistance();
       },

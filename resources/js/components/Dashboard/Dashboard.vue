@@ -73,7 +73,7 @@
           </tbody>
           <tbody v-else="">
             <tr>
-              <td colspan="11" class="text-center">No appointments available.</td>
+              <td colspan="12" class="text-center">No appointments available.</td>
             </tr>
           </tbody>
         </table>

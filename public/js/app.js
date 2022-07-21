@@ -5920,9 +5920,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     'from.longitude': function fromLongitude(val, old) {
       this.getDistance();
     },
-    'to.id': function toId(val, old) {
-      this.getDistance();
-    },
     'to.zip': function toZip(val, old) {
       this.getDistance();
     },
@@ -30950,7 +30947,7 @@ var render = function () {
         ]
       ),
       _vm._v(" "),
-      _c("router-view"),
+      _c("router-view", { key: _vm.$route.path }),
       _vm._v(" "),
       _c(
         "div",

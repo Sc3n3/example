@@ -16,7 +16,7 @@
         </div>
       </div>
     </nav>
-    <router-view></router-view>
+    <router-view :key="$route.path"></router-view>
     <div v-show="$root.ui.loading" class="loading-screen align-items-center justify-content-center">
       <div class="spinner"></div>
     </div>
