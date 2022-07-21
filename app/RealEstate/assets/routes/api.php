@@ -20,8 +20,8 @@ Route::prefix('/offices')->group(function(){
 });
 
 Route::prefix('/properties')->group(function(){
-    Route::get('/', 'OfficeController@index');
-    Route::get('/{property}', 'OfficeController@show');
+    Route::get('/', 'PropertyController@index');
+    Route::get('/{property}', 'PropertyController@show');
 });
 
 Route::prefix('/agents')->group(function(){
