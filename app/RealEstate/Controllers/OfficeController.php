@@ -24,19 +24,4 @@ class OfficeController extends Controller
     {
         return response()->json($office);
     }
-
-    public function store()
-    {
-
-    }
-
-    public function update()
-    {
-
-    }
-
-    public function destroy()
-    {
-
-    }
 }

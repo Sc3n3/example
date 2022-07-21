@@ -24,19 +24,4 @@ class PropertyController extends Controller
     {
         return response()->json($property);
     }
-
-    public function store()
-    {
-
-    }
-
-    public function update()
-    {
-
-    }
-
-    public function destroy()
-    {
-
-    }
 }
