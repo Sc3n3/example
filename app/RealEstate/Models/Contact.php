@@ -17,7 +17,7 @@ class Contact extends Model
     /**
      * @var array
      */
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
